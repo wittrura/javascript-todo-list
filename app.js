@@ -1,9 +1,9 @@
 (function() {
   // model
   model = [
-    {taskName: 'do some stuff', taskComplete: false},
-    {taskName: 'eat healthy', taskComplete: true},
-    {taskName: 'get to bed early', taskComplete: true}
+    {taskName: 'Do some stuff', taskComplete: false},
+    {taskName: 'Eat healthy', taskComplete: true},
+    {taskName: 'Get to bed early', taskComplete: true}
   ];
 
   // controller
@@ -21,6 +21,7 @@
       let newTask = controller.getNewTask();
       model.push(newTask);
 
+      // update displayed tasks
       view.renderTasks(controller.getTasks());
       return newTask;
     },
@@ -40,28 +41,26 @@
       document.getElementsByTagName('input')[0].value = '';
 
       tasks.forEach(function(task) {
+        // crete a new li for each task
         let taskElement = document.createElement('li');
         taskElement.textContent = task.taskName;
-
         taskList.appendChild(taskElement);
 
-        let taskEditPencil = document.createElement('span');
-        taskEditPencil.setAttribute('class', 'glyphicon glyphicon-pencil');
-        taskEditPencil.style.paddingRight = '10px';
-        taskEditPencil.style.float = 'left';
-        taskElement.appendChild(taskEditPencil);
+        // add glyphicon for editing
+        let taskEdit = document.createElement('span');
+        taskEdit.textContent = 'EDIT';
+        taskEdit.style.paddingRight = '10px';
+        taskEdit.style.float = 'left';
+        taskElement.appendChild(taskEdit);
 
-        let taskCompleteCheck = document.createElement('span');
-        taskCompleteCheck.setAttribute('class', 'glyphicon glyphicon-ok');
-        taskCompleteCheck.style.float = 'right';
-        taskElement.appendChild(taskCompleteCheck);
+        // add glyphicon for marking complete
+        let taskComplete = document.createElement('span');
+        taskComplete.textContent = 'X';
+        taskComplete.style.float = 'right';
+        taskElement.appendChild(taskComplete);
       });
 
     },
-
-    // formatCompletedTaskElement: function(taskElement) {
-    //   taskElement.style.
-    // },
 
     init: function() {
       this.renderTasks(controller.getTasks());
